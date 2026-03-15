@@ -1,0 +1,59 @@
+name: Build
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+      upload:
+        type: boolean
+        default: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Kubernetes ${{ matrix.kubernetes.version }} (${{ matrix.base.name }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        kubernetes:
+          - version: v1.35.0
+            release: v0.20.1
+        base:
+          - name: Arch Linux
+            directory: archlinux
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up mkosi
+        uses: systemd/mkosi@v26
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --assume-yes --no-install-recommends \
+            mtools \
+            python3-pefile \
+            systemd-boot
+      - name: Build image
+        working-directory: ${{ matrix.base.directory }}
+        env:
+          KUBERNETES_VERSION: ${{ matrix.kubernetes.version }}
+          KUBERNETES_RELEASE: ${{ matrix.kubernetes.release }}
+        run: |
+          sudo -E mkosi --image-id=${{ matrix.base.directory }}
+      - name: Upload
+        if: ${{ inputs.upload || false }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          tag: ${{ inputs.tag }}
+          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}.raw.gz
