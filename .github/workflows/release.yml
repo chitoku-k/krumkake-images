@@ -9,9 +9,9 @@ defaults:
     shell: bash
 
 jobs:
-  publish:
-    name: Publish
-    uses: ./.github/workflows/publish.yml
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
     permissions:
       contents: write
     with:
