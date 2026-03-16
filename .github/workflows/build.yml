@@ -50,10 +50,10 @@ jobs:
           KUBERNETES_VERSION: ${{ matrix.kubernetes.version }}
           KUBERNETES_RELEASE: ${{ matrix.kubernetes.release }}
         run: |
-          sudo -E mkosi --image-id=${{ matrix.base.directory }}
+          sudo -E mkosi --image-id=${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}
       - name: Upload
         if: ${{ inputs.upload || false }}
         uses: svenstaro/upload-release-action@v2
         with:
           tag: ${{ inputs.tag }}
-          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}.raw.gz
+          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}.raw.gz
