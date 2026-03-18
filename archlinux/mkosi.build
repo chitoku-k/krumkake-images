@@ -18,24 +18,20 @@ case $ARCHITECTURE in
 esac
 
 curl -sSfL \
-    --create-dirs \
-    --output-dir "$DESTDIR/usr/bin" \
     --remote-header-name \
     --remote-name-all \
     "https://dl.k8s.io/release/$KUBERNETES_VERSION/bin/linux/$arch/"{kubeadm,kubelet}
 
-chmod +x "$DESTDIR/usr/bin/"{kubeadm,kubelet}
-
 curl \
     -sSfL \
-    --create-dirs \
-    --output-dir "$DESTDIR/usr/lib/systemd/system" \
     --output kubelet.service \
     "https://raw.githubusercontent.com/kubernetes/release/$KUBERNETES_RELEASE/cmd/krel/templates/latest/kubelet/kubelet.service"
 
 curl \
     -sSfL \
-    --create-dirs \
-    --output-dir "$DESTDIR/usr/lib/systemd/system/kubelet.service.d" \
     --output 10-kubeadm.conf \
     "https://raw.githubusercontent.com/kubernetes/release/$KUBERNETES_RELEASE/cmd/krel/templates/latest/kubeadm/10-kubeadm.conf"
+
+install -D -m0755 -t "$DESTDIR/usr/bin" kubeadm kubelet
+install -D -m0644 -t "$DESTDIR/usr/lib/systemd/system" kubelet.service
+install -D -m0644 -t "$DESTDIR/usr/lib/systemd/system/kubelet.service.d" 10-kubeadm.conf
