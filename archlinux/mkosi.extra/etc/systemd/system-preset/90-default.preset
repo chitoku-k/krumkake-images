@@ -1,3 +1,2 @@
 enable cloud-init-main.service
 enable cloud-final.service
-disable systemd-homed-firstboot.service
