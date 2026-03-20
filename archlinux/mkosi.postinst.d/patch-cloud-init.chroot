@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+cd /tmp
+
+sed -i \
+    '/class Distro/a \    prefer_fqdn = True' \
+    /usr/lib/python3.*/site-packages/cloudinit/distros/arch.py
