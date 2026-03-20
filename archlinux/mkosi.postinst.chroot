@@ -7,3 +7,6 @@ containerd config default > config.toml
 sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' config.toml
 
 install -D -m0644 -t /etc/containerd config.toml
+
+# TODO: Debug prefer_fqdn_over_hostname
+sed -i '/def _select_hostname/a \        LOG.debug("FQDN: %s, prefer_fqdn_over_hostname: %s", fqdn, util.get_cfg_option_bool(self._cfg, "prefer_fqdn_over_hostname", self.prefer_fqdn))' /usr/lib/python3.14/site-packages/cloudinit/distros/__init__.py
