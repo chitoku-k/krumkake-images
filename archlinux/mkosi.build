@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+cd /tmp
 
 case $ARCHITECTURE in
     x86-64)
