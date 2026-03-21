@@ -2,6 +2,6 @@
 *.raw
 *.raw.gz
 *.vmlinuz
-archlinux
+archlinux*
 initrd
 initrd.cpio.*
