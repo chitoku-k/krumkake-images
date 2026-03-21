@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+cd /tmp
+
+sed -i 's/^PS1=/#\0/' /etc/skel/.bashrc
