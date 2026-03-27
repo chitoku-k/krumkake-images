@@ -4,6 +4,4 @@ set -euo pipefail
 cd /tmp
 
 containerd config default > config.toml
-sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' config.toml
-
 install -D -m0644 -t /etc/containerd config.toml
