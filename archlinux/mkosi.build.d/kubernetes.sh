@@ -22,7 +22,7 @@ curl \
     -sSfL \
     --remote-header-name \
     --remote-name-all \
-    "https://dl.k8s.io/release/$KUBERNETES_VERSION/bin/linux/$arch/"{kubeadm,kubelet}
+    "https://dl.k8s.io/release/$KUBERNETES_VERSION/bin/linux/$arch/"{kubeadm,kubectl,kubelet}
 
 curl \
     -sSfL \
