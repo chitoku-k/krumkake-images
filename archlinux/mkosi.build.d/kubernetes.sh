@@ -35,6 +35,6 @@ curl \
     "https://raw.githubusercontent.com/kubernetes/release/$KUBERNETES_RELEASE/cmd/krel/templates/latest/kubeadm/10-kubeadm.conf"
 
 install -d -m0700 "$DESTDIR/etc/kubernetes/manifests"
-install -D -m0755 -t "$DESTDIR/usr/bin" kubeadm kubelet
+install -D -m0755 -t "$DESTDIR/usr/bin" kubeadm kubectl kubelet
 install -D -m0644 -t "$DESTDIR/usr/lib/systemd/system" kubelet.service
 install -D -m0644 -t "$DESTDIR/usr/lib/systemd/system/kubelet.service.d" 10-kubeadm.conf
