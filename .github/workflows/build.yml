@@ -57,4 +57,5 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           tag: ${{ inputs.tag }}
-          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}.raw
+          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}.{raw,manifest}
+          file_glob: true
