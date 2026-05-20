@@ -44,7 +44,8 @@ jobs:
             libarchive-tools \
             mtools \
             python3-pefile \
-            systemd-boot
+            systemd-boot \
+            systemd-ukify
       - name: Build image
         working-directory: ${{ matrix.base.directory }}
         env:
