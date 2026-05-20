@@ -9,6 +9,7 @@ krumkake-images
 - [cpio](https://www.gnu.org/software/cpio/)
 - [mtools](https://www.gnu.org/software/mtools/)
 - [bootctl](https://www.freedesktop.org/software/systemd/man/latest/bootctl.html)
+- [ukify](https://www.freedesktop.org/software/systemd/man/latest/ukify.html)
 - [python](https://www.python.org/)
   - [pefile](https://github.com/erocarrera/pefile)
 - [pacman](https://gitlab.archlinux.org/pacman/pacman)
@@ -22,6 +23,7 @@ pacman -Syu \
     mkosi
     cpio \
     mtools \
+    systemd-ukify \
     python \
     python-pefile
 ```
@@ -34,6 +36,7 @@ apt-get install --no-install-recommends \
     cpio \
     mtools \
     systemd-boot-tools \
+    systemd-ukify \
     python3 \
     python3-pefile \
     pacman-package-manager \
