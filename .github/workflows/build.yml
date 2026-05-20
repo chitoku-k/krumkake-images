@@ -53,11 +53,11 @@ jobs:
           KUBERNETES_VERSION: ${{ matrix.kubernetes.version }}
           KUBERNETES_RELEASE: ${{ matrix.kubernetes.release }}
         run: |
-          sudo -E mkosi --image-id=${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}.${{ matrix.base.profile }} --profile=${{ matrix.base.profile }}
+          sudo -E mkosi --image-id=${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}${{ inputs.tag && format('-{0}', inputs.tag) || '' }}.${{ matrix.base.profile }} --profile=${{ matrix.base.profile }}
       - name: Upload
         if: ${{ inputs.upload || false }}
         uses: svenstaro/upload-release-action@v2
         with:
           tag: ${{ inputs.tag }}
-          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}.${{ matrix.base.profile }}.*
+          file: ${{ matrix.base.directory }}/${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}${{ inputs.tag && format('-{0}', inputs.tag) || '' }}.${{ matrix.base.profile }}.*
           file_glob: true
