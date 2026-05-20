@@ -53,7 +53,7 @@ export KUBERNETES_RELEASE=v0.0.0 # https://github.com/kubernetes/release/release
 sudo \
     --preserve-env=KUBERNETES_VERSION \
     --preserve-env=KUBERNETES_RELEASE \
-    mkosi --image-id="archlinux-$KUBERNETES_VERSION" --force
+    mkosi --image-id="archlinux-$KUBERNETES_VERSION" --force --profile=vm
 ```
 
 ## Verify
