@@ -1,0 +1,4 @@
+# TODO: MountPoint= in repart.d(5) has been available since systemd-repart version 256.
+LABEL=root / ext4 ro,relatime 0 0
+LABEL=home /home ext4 rw,relatime 0 0
+LABEL=var /var ext4 rw,relatime,x-systemd.growfs 0 0
