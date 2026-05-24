@@ -53,7 +53,7 @@ export KUBERNETES_RELEASE=v0.0.0 # https://github.com/kubernetes/release/release
 sudo \
     --preserve-env=KUBERNETES_VERSION \
     --preserve-env=KUBERNETES_RELEASE \
-    mkosi --image-id="archlinux-$KUBERNETES_VERSION" --force --profile=vm
+    mkosi --image-id=archlinux-vm --image-version=1 --force --profile=vm
 ```
 
 ## Verify
@@ -62,10 +62,8 @@ Install [guestfs-tools](https://libguestfs.org/).
 
 ```bash
 cd archlinux
-export KUBERNETES_VERSION=v0.0.0 # https://github.com/kubernetes/kubernetes/releases
-export KUBERNETES_RELEASE=v0.0.0 # https://github.com/kubernetes/release/releases
-virt-df -a "archlinux-$KUBERNETES_VERSION"
-virt-ls -a "archlinux-$KUBERNETES_VERSION" -m /dev/sda2:/ -m /dev/sda1:/boot -l /
+virt-df -a archlinux-vm_1
+virt-ls -a archlinux-vm_1 -m /dev/sda2:/ -m /dev/sda1:/boot -l /
 ```
 
 [workflow-link]:    https://github.com/chitoku-k/krumkake-images/actions?query=branch:master
