@@ -50,7 +50,8 @@ jobs:
       - name: Build image
         working-directory: ${{ matrix.base.directory }}
         env:
-          IMAGE_ID: ${{ matrix.base.directory }}-${{ matrix.kubernetes.version }}${{ inputs.tag && format('-{0}', inputs.tag) || '' }}.${{ matrix.base.profile }}
+          IMAGE_ID: ${{ matrix.base.directory }}-${{ matrix.base.profile }}
+          IMAGE_VERSION: ${{ inputs.tag || 1 }}
           PROFILE: ${{ matrix.base.profile }}
           KUBERNETES_VERSION: ${{ matrix.kubernetes.version }}
           KUBERNETES_RELEASE: ${{ matrix.kubernetes.release }}
@@ -58,12 +59,13 @@ jobs:
           sudo -E \
             mkosi \
               --image-id="$IMAGE_ID" \
+              --image-version="$IMAGE_VERSION" \
               --profile="$PROFILE"
 
           out_dir=/tmp/output
           mkdir -p "$out_dir"
-          awk '{ gsub(/^\*/, "", $2); print $2 }' "mkosi.output/$IMAGE_ID.SHA256SUMS" | xargs -I {} mv mkosi.output/{} "$out_dir"
-          mv "mkosi.output/$IMAGE_ID".{manifest,SHA256SUMS} "$out_dir"
+          awk '{ gsub(/^\*/, "", $2); print $2 }' "mkosi.output/${IMAGE_ID}_${IMAGE_VERSION}.SHA256SUMS" | xargs -I {} mv mkosi.output/{} "$out_dir"
+          mv "mkosi.output/${IMAGE_ID}_${IMAGE_VERSION}".{manifest,SHA256SUMS} "$out_dir"
       - name: Upload
         if: ${{ inputs.upload || false }}
         uses: svenstaro/upload-release-action@v2
