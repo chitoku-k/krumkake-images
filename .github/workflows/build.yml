@@ -62,8 +62,8 @@ jobs:
 
           out_dir=/tmp/output
           mkdir -p "$out_dir"
-          awk '{ gsub(/^\*/, "", $2); print $2 }' "$IMAGE_ID.SHA256SUMS" | xargs -I {} mv {} "$out_dir"
-          mv "$IMAGE_ID".{manifest,SHA256SUMS} "$out_dir"
+          awk '{ gsub(/^\*/, "", $2); print $2 }' "mkosi.output/$IMAGE_ID.SHA256SUMS" | xargs -I {} mv mkosi.output/{} "$out_dir"
+          mv "mkosi.output/$IMAGE_ID".{manifest,SHA256SUMS} "$out_dir"
       - name: Upload
         if: ${{ inputs.upload || false }}
         uses: svenstaro/upload-release-action@v2

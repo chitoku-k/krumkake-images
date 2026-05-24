@@ -1,7 +1,0 @@
-*.initrd
-*.raw
-*.raw.gz
-*.vmlinuz
-archlinux*
-initrd
-initrd.cpio.*
