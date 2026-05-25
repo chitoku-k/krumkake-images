@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+cd /tmp
+
+mv /var/lib/pacman /usr/lib
+sed \
+    -i \
+    -e 's/^#DBPath/DBPath /' \
+    -e 's|/var/lib/pacman/|/usr/lib/pacman/|' \
+    -e '/^\[options\]/! { /^\[.\+\]/,$ { /^[^#\s]/s/^/#/ } }' \
+    /etc/pacman.conf
