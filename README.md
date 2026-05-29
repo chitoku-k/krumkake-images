@@ -22,6 +22,7 @@ krumkake-images
 pacman -Syu \
     mkosi
     cpio \
+    erofs-utils \
     mtools \
     systemd-ukify \
     python \
@@ -34,6 +35,7 @@ pacman -Syu \
 apt-get install --no-install-recommends \
     mkosi \
     cpio \
+    erofs-utils \
     mtools \
     systemd-boot-tools \
     systemd-ukify \
@@ -62,8 +64,8 @@ Install [guestfs-tools](https://libguestfs.org/).
 
 ```bash
 cd archlinux
-virt-df -a archlinux-vm_1
-virt-ls -a archlinux-vm_1 -m /dev/sda2:/ -m /dev/sda1:/boot -l /
+virt-df -a mkosi.output/archlinux-vm_1
+virt-ls -a mkosi.output/archlinux-vm_1 -m /dev/sda2:/ -m /dev/sda1:/boot -l /
 ```
 
 [workflow-link]:    https://github.com/chitoku-k/krumkake-images/actions?query=branch:master
