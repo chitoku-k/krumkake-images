@@ -1,2 +1,2 @@
 [plugins.'io.containerd.cri.v1.runtime'.cni]
-bin_dirs = ['/opt/cni/bin', '/var/lib/cni/bin']
+bin_dirs = ['/usr/lib/cni', '/opt/cni/bin']
