@@ -20,7 +20,7 @@ defaults:
 jobs:
   build:
     name: Kubernetes ${{ matrix.kubernetes.version }} (${{ matrix.base.name }}) [${{ matrix.base.profile }}]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: write
     strategy:
@@ -37,7 +37,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
       - name: Set up mkosi
-        uses: systemd/mkosi@v26
+        uses: systemd/mkosi@c4c3d793d0f6f0a2f26895de5ed9382396f36bb5
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -46,7 +46,8 @@ jobs:
             libarchive-tools \
             mtools \
             python3-pefile \
-            systemd-boot \
+            systemd-boot-tools \
+            systemd-repart \
             systemd-ukify
       - name: Build image
         working-directory: ${{ matrix.base.directory }}
@@ -57,7 +58,9 @@ jobs:
           KUBERNETES_VERSION: ${{ matrix.kubernetes.version }}
           KUBERNETES_RELEASE: ${{ matrix.kubernetes.release }}
         run: |
-          sudo -E \
+          sudo \
+            --preserve-env=KUBERNETES_VERSION \
+            --preserve-env=KUBERNETES_RELEASE \
             mkosi \
               --image-id="$IMAGE_ID" \
               --image-version="$IMAGE_VERSION" \
