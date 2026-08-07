@@ -35,7 +35,7 @@ jobs:
             profile: vm
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up mkosi
         uses: systemd/mkosi@c4c3d793d0f6f0a2f26895de5ed9382396f36bb5
       - name: Install dependencies
