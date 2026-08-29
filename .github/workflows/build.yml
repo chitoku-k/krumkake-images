@@ -37,7 +37,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
       - name: Set up mkosi
-        uses: systemd/mkosi@c4c3d793d0f6f0a2f26895de5ed9382396f36bb5
+        uses: systemd/mkosi@v27
       - name: Install dependencies
         run: |
           sudo apt-get update
