@@ -54,7 +54,7 @@ jobs:
       - name: Build image
         working-directory: ${{ matrix.base.directory }}
         env:
-          IMAGE_ID: ${{ matrix.base.directory }}-${{ matrix.base.profile }}
+          IMAGE_ID: ${{ matrix.base.directory }}-${{ matrix.base.profile }}-${{ matrix.kubernetes.version }}
           IMAGE_VERSION: ${{ inputs.tag || 1 }}
           PROFILE: ${{ matrix.base.profile }}
           KUBERNETES_VERSION: ${{ matrix.kubernetes.version }}
