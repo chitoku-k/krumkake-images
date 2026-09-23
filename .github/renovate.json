@@ -7,10 +7,40 @@
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
   "rangeStrategy": "bump",
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "managerFilePatterns": [".github/workflows/*.yml"],
+      "matchStrings": [
+        "jobs.*.strategy.matrix.kubernetes[version].{\"currentValue\": version}"
+      ],
+      "depNameTemplate": "kubernetes/kubernetes",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "managerFilePatterns": [".github/workflows/*.yml"],
+      "matchStrings": [
+        "jobs.*.strategy.matrix.kubernetes[release].{\"currentValue\": release}"
+      ],
+      "depNameTemplate": "kubernetes/release",
+      "datasourceTemplate": "github-releases"
+    }
+  ],
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
       "addLabels": ["github_actions"]
+    },
+    {
+      "matchDepNames": [
+        "kubernetes/kubernetes",
+        "kubernetes/release"
+      ],
+      "groupName": "kubernetes/kubernetes",
+      "minimumGroupSize": 2
     },
     {
       "matchDepNames": ["*"],

@@ -27,8 +27,6 @@ jobs:
       fail-fast: false
       matrix:
         kubernetes:
-          - version: v1.36.4
-            release: v0.21.1
           - version: v1.37.0
             release: v0.21.1
         base:
