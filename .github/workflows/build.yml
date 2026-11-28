@@ -27,8 +27,8 @@ jobs:
       fail-fast: false
       matrix:
         kubernetes:
-          - version: v1.37.2
-            release: v0.22.0
+          - version: v1.37.3
+            release: v0.23.1
         base:
           - name: Arch Linux
             directory: archlinux
